@@ -1,0 +1,6 @@
+Requirements
+- django.lettuce package
+
+easy_install lettuce
+dev@scidentify.info
+

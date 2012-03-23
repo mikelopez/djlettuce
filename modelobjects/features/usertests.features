@@ -1,0 +1,8 @@
+Feature: Test user specific features
+
+  Scenario: User groups and accounts
+    I should have group "Publisher"
+    I should have group "Collector"
+    I should have user "user1" with password "password" and group "Publisher"
+    I should have user "user2" with password "collector1" and group "Collector"
+  
