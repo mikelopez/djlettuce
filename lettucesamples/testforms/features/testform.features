@@ -2,7 +2,7 @@ Feature: Testing page forms
 
 Scenario: Test Document upload Page forms
   I should login with "username" and "password"
-  Given I access the "web_upload_publisher_video" page
+  Given I access the "web_upload_doc" page
   I should have a form field "name" of type "text"
   I should have a form field "file" of type "file"
   I should have a form field "reglink" of type "dropdown"
