@@ -28,6 +28,13 @@ def setstuff():
     world.data = {}
     world.browser = Client()
 
+
+@step(u'I should reset the data')
+def i_should_reset_the_data(step):
+    world.data = {}
+    assert True, "ok"
+
+
 @step(u'Given I access the "(.*)" page')
 def given_i_access_the_group1_page(step, group1):
     """ access a page by pagename expect 200"""
@@ -51,6 +58,36 @@ def i_should_have_a_textfield_group1_and_put_value_group2(step, group1, group2):
     assert_true(formfield.type == "password" or formfield.type == "text")
     assert_equals(group1, formfield.name)
 
+
+@step(u'I should have a textfield "(.*)" with value "(.*)"')
+def i_should_have_a_textfield_group1_with_value_group2(step, group1, group2):
+    world.data[group1] = group2
+
+    formfield = None
+    for form in world.dom.forms:
+        for html_input in form.inputs:
+            if html_input.name == group1:
+                formfield = html_input
+
+    assert_true(formfield.type == "password" or formfield.type == "text")
+    assert_equals(group1, formfield.name)
+    assert_equals(group2, formfield.value)
+
+@step(u'I should have a hiddenfield "(.*)" with value "(.*)"')
+def i_should_have_a_hiddenfield_group1_with_value_group2(step, group1, group2):
+    world.data[group1] = group2
+
+    formfield = None
+    for form in world.dom.forms:
+        for html_input in form.inputs:
+            if html_input.name == group1:
+                formfield = html_input
+
+    assert_true(formfield.type == "hidden")
+    assert_equals(group1, formfield.name)
+    assert_equals(group2, formfield.value)
+
+
  
 @step(u'I should be redirected to page "(.*)"')
 def i_should_be_redirected_to_page_group1(step, group1):
@@ -72,5 +109,6 @@ def i_should_submit_the_data(step):
         if status_code == 302:
             foundpage = url
             world.full_redirect_url = url
+
 
 
